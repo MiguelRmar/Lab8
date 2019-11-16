@@ -242,6 +242,8 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
     
     **R/:** El propósito del Health Probe, como su nombre lo indica es hacer una prueba para verificar el "estado de salud" de la aplicación.
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
+    
+    **R/:** El propósito de la regla de equilibrio de carga, es que si un servidor no es saludable, el equilibrador de carga no enviará tráfico a este servidor.
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
 * ¿Cuál es el propósito del *Network Security Group*?
