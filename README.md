@@ -86,7 +86,19 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 **Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
+   
+   **R/:** Azure crea 7 recursos con la máquina virtual incluyendo recursos de: Red Virtual, Cuenta de almacenamiento, la máquina virtual, una dirección IP pública, un grupo de seguridad de red, una interfaz de red y un Disco.
+   ![Rta 1](images/questions/1.jpeg)
 2. ¿Brevemente describa para qué sirve cada recurso?
+
+    **R/:**
+    
+    * **Red Virtual:** Es
+    * **Cuenta de almacenamiento:**
+    * **Máquina virtual:**
+    * **Dirección IP pública:**
+    * **Grupo de seguridad de red**
+    * **Interfaz de red y un Disco:**
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
@@ -95,7 +107,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     * Si hubo fallos documentelos y explique.
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
-9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
+9.  ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
 
