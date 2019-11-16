@@ -1,0 +1,6 @@
+INTEGRANTES:
+Pedro Mayorga
+Miguel Rojas
+
+REPOSITORIO:
+https://github.com/MiguelRmar/Lab8.git

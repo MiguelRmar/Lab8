@@ -93,19 +93,33 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
     **R/:**
     
-    * **Red Virtual:** Es
-    * **Cuenta de almacenamiento:**
-    * **Máquina virtual:**
-    * **Dirección IP pública:**
-    * **Grupo de seguridad de red**
-    * **Interfaz de red y un Disco:**
+    * **Red Virtual:** Es una VNet (red virtual) que se crea para que la máquina virtual sea accesible desde internet.
+    * **Cuenta de almacenamiento:** Una cuenta de almacenamiento sirve para contener todos los objetos de datos de almacenamiento de Azure: blobs, archivos, colas, tablas y discos.
+    * **Máquina virtual:** Es cómo tal el recurso principal de la máquina virtual creada, sirve para poner a ejecutar servicios como FibonacciApp en la nube.
+    * **Dirección IP pública:** Es la dirección IP pública de nuestra máquina virtual que sirve para poder conectarnos a ella desde Internet.
+    * **Grupo de seguridad de red** Sirve para filtrar el tráfico de red hacia y desde los recursos de Azure en una red virtual de Azure mediante reglas de seguridad que permiten o deniegan el tráfico.
+    * **Interfaz de red:** Una interfaz de red permite que una máquina virtual de Azure se comunique con los recursos de Internet, Azure y locales.
+    * **Disco:** Disco duro virtual que sirve para almacenar información de nuestra máquina virtual.
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
+
+    **R/:** Porque el comando que ejecutamos desde SSH `npm FibonacciApp.js` es un comando que solo se ejecutará una vez desde nuestra conexión SSH, por esto al añadir la opción `forever`, lo que conseguimos es que nuestro servicio quede funcionando ininterrumpidamente en nuestra máquina virtual. 
+    
+    Debemos crear un *Inbound port rule* porque esta regla de puerto de entrada es la que nos va a permitir el acceso a la máquina virtual remotamente desde otro navegador.
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
+
+    **R/:** La función tarda tanto tiempo porque está calculando números de orden mayor a 10^6 y al ser fibonacci una función recurrente, a medida que el número sea mayor tiene que hacer una mayor cantidad de calculos, resultando en un tiempo cada vez mayor.
+    ![Rta 4](images/questions/4.jpeg)
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+
+    **R/:** Porque en este periodo de tiempo fue cuando envíamos la petición de calcular un número de Fibonacci, entonces la función está consumiendo esa cantidad de CPU porque al ser una función recurrente está usando varios cores para realizar dichos calculos. 
+    ![Rta 5](images/questions/5.jpeg)
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
     * Si hubo fallos documentelos y explique.
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
+
+    **R/:** La diferencia más particular, es que las máquinas B2ms son mucho más grandes que las B1ls sobretodo en sus aspectos más importantes: la CPU, memoria y el disco duro. Además las B1ls solo se encuentran disponible para Linux, mientras que B2ms para cualquiera Windows/Linux. 
+    ![Rta 7](images/questions/7.png)
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
 9.  ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
@@ -198,17 +212,38 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 **Preguntas**
 
 * ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
+    
+    **R/:**
+
+    **Tipos de Balanceadores de Carga**
+    * **Interno:** Los equilibradores de carga internos equilibran el tráfico de direcciones IP privadas.
+  
+    * **Publico** Los equilibradores de carga públicos pueden equilibrar el tráfico proveniente de direcciones IP públicas.
+
+    La diferencia está en que el tipo de balanceador de carga interno equilibra el tráfico de direcciónes IP privadas, mientras que el balanceador de carga público equilibra el tráfico de direcciones IP públicas.
+
+    **SKU**
+
+    (Stock Keeping Units) son un rango de precios creado al momento de inicializar un recurso en Azure.
+
+    **Tipos de SKU**
+    * **Free:** Crea un servicio limitado para pequeños proyectos o tutoriales que no se puede escalar, es decir, no hay equilibrador de carga.
+    * **Básico:** Servicio con un equilibrador de carga básico para un máximo de 100 instancias.
+    * **Estandar:** Servicio con un equilibrador de carga estándar para un máximo de 1000 instancias, mayor flexibilidad de los grupos de back-end, puertos de alta disponibilidad y escenarios zonales y con redundancia de zona.
+
+    Se diferencian en que a medida que el rango de precios de un SKU es mayor, este puede ofrecer un mejor equilibrio de carga para un mayor número de instancias.
+
+    **¿Por qué el balanceador de carga necesita una IP pública?**
+    Porque el balanceador de carga necesita recibir todas las peticiones desde la IP publíca, ya que es desde allí dnde va a recibir todas la peticiones.
 * ¿Cuál es el propósito del *Backend Pool*?
+    
+    **R/:** El propósito del backend pool es configurar que máquinas virtuales deseamos balancear en el balanceador de cargas.
 * ¿Cuál es el propósito del *Health Probe*?
+    
+    **R/:** El propósito del Health Probe, como su nombre lo indica es hacer una prueba para verificar el "estado de salud" de la aplicación.
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
 * ¿Cuál es el propósito del *Network Security Group*?
 * Informe de newman 1 (Punto 2)
 * Presente el Diagrama de Despliegue de la solución.
-
-
-
-
-
-
