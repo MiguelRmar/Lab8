@@ -111,19 +111,42 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     ![Rta 4](images/questions/4.jpeg)
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
 
-    **R/:** Porque en este periodo de tiempo fue cuando envíamos la petición de calcular un número de Fibonacci, entonces la función está consumiendo esa cantidad de CPU porque al ser una función recurrente está usando varios cores para realizar dichos calculos. 
+    **R/:** Porque en este periodo de tiempo fue cuando envíamos la petición de calcular un número de Fibonacci, entonces la función está consumiendo esa cantidad de CPU porque al ser una función recurrente está usando varios cores para realizar dichos calculos.
     ![Rta 5](images/questions/5.jpeg)
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
+
+        ![Rta 6a](images/questions/6a.jpeg)
+        ![Rta 6b](images/questions/6b.jpeg)
+        ![Rta 6c](images/questions/6c.jpeg)
     * Si hubo fallos documentelos y explique.
+
+        Como se puede ver en la imagen de abajo, hubo un fallo en la iteración 3 de postman al hacer una solicitud sobre FibonacciApp
+        ![Rta 6b](images/questions/6b.jpeg)
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
 
-    **R/:** La diferencia más particular, es que las máquinas B2ms son mucho más grandes que las B1ls sobretodo en sus aspectos más importantes: la CPU, memoria y el disco duro. Además las B1ls solo se encuentran disponible para Linux, mientras que B2ms para cualquiera Windows/Linux. 
+    **R/:** La diferencia más particular, es que las máquinas B2ms son mucho más grandes que las B1ls sobretodo en sus aspectos más importantes: la CPU, memoria y el disco duro. Además las B1ls solo se encuentran disponible para Linux, mientras que B2ms para cualquiera Windows/Linux.
     ![Rta 7](images/questions/7.png)
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
-9.  ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
+
+    **R/:** Aumentar el tamaño de la VM se convierte en una buena solución en este escenario porque cuando le cambiamos el tamaño a la VM, se reducen significativamente los tiempos de ejecución en FibonacciApp, como se puede observar a continuación:
+    ![Rta 8](images/questions/8.jpeg)
+9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
+
+    **R/:** La infraestructura sigue siendo la misma en el escalamiento vertical, por lo tanto no hay efectos negativos ya que la aplicación sigue funcionando tal cuál cómo lo estaba haciendo.
+    ![Rta 9a](images/questions/9a.jpeg)
+    ![Rta 9b](images/questions/9b.jpeg)
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
+
+    **R/:** Tal cómo se puede evidenciar, el consumo es significativamente menor al realizar el escalamiento vertical.
+    ![Rta 10](images/questions/10.jpeg)
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
+
+    Usando Postman
+    ![Rta 11a](images/questions/11a.jpeg)
+    ![Rta 11b](images/questions/11b.jpeg)
+    Vemos que el comportamiento del sistema se encuentra mucho más equilibrado usando su capacidad real:
+    ![Rta 11c](images/questions/11c.jpeg)
 
 ### Parte 2 - Escalabilidad horizontal
 
@@ -245,7 +268,31 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
     
     **R/:** El propósito de la regla de equilibrio de carga, es que si un servidor no es saludable, el equilibrador de carga no enviará tráfico a este servidor.
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
+
+    **R/:** Una Virtual Network (VNet) es el bloque de construcción fundamental para su red privada en Azure. VNet permite que muchos tipos de recursos de Azure, como las máquinas virtuales de Azure (VM), se comuniquen de manera segura entre sí, Internet y redes locales. La subred es una subdivisión lógica de de la IP asignada en Azure, es un rango de direcciones lógicas.
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
+
+    **R/:** Las Zonas de Disponibilidad son una oferta de alta disponibilidad que protege las aplicaciones en Azure y datos de fallas en el centro de datos. Las zonas de disponibilidad son ubicaciones físicas únicas dentro de una región de Azure. Una Ip con zone-redundant significa que la zona de la ip ya ha sido usada y/o está siendo repetida.
 * ¿Cuál es el propósito del *Network Security Group*?
-* Informe de newman 1 (Punto 2)
-* Presente el Diagrama de Despliegue de la solución.
+
+    **R/:** El proposito del grupo de seguridad de red es "filtrar" el acceso a los recursos mediante el uso de reglas de seguridad que permiten o niegan el tráfico de red entrante a, o el tráfico de red saliente, de varios tipos de recursos de Azure.
+* **Informe de Newman 1 (Punto 2)**
+
+  1. Peticiones por Newman al balanceador de carga:
+   ![Rta Newman 1](images/questions/2Newman1.jpeg)
+   ![Rta Newman 2](images/questions/2Newman2.jpeg)
+  2. Comportamientos de las máquinas virtuales:
+   ![Rta Maq 1](images/questions/2Maquinas1.jpeg)
+   ![Rta Maq 2](images/questions/2Maquinas2.jpeg)
+   ![Rta Maq 3](images/questions/2Maquinas3.jpeg)
+
+   **Despúes de agregar la 4ta máquina virtual**
+
+  3. Peticiones por Newman al balanceador de carga:
+   ![Rta Pro New 1](images/questions/2ProNewman1.jpeg)
+   ![Rta Pro New 2](images/questions/2ProNewman2.jpeg)
+  4. Comportamientos de las 4 máquinas virtuales:
+   ![Rta Pro Maq 1](images/questions/2ProMaquinas1.jpeg)
+   ![Rta Pro Maq 2](images/questions/2ProMaquinas2.jpeg)
+   ![Rta Pro Maq 3](images/questions/2ProMaquinas3.jpeg)
+   ![Rta Pro Maq 4](images/questions/2ProMaquinas4.jpeg)
